@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta de Servicios - Idealo Media Arts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #ffffff;
+            --accent: #4a6cf7;
+            --accent-light: #e8ecff;
+            --text: #1a1a1a;
+            --light: #f8f8f8;
+            --gray: #666666;
+            --border: #e0e0e0;
+            --gradient: linear-gradient(135deg, #4a6cf7 0%, #2541b2 100%);
+            --gradient-dark: linear-gradient(135deg, #000 0%, #111 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            color: var(--text);
+            line-height: 1.7;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 90px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="rgba(255,255,255,0.03)" d="M0,50 Q25,30 50,50 T100,50 L100,100 L0,100 Z"/></svg>') repeat;
+            pointer-events: none;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: -50%; right: -10%;
+            width: 300px; height: 300px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1em;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0.85;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: '';
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.8em;
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 16px;
+            letter-spacing: -1.5px;
+            position: relative;
+        }
+
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .header .subtitle {
+            font-size: 1.35em;
+            font-weight: 300;
+            opacity: 0.8;
+            letter-spacing: 0.5px;
+            margin-bottom: 32px;
+            margin-top: 20px;
+        }
+
+        .accent-line {
+            width: 120px;
+            height: 5px;
+            background: var(--gradient);
+            border-radius: 3px;
+            transition: width 0.4s ease;
+        }
+
+        /* INFO BAR */
+        .info-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .info-item {
+            padding: 32px;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            background: var(--accent-light);
+        }
+
+        .info-item:last-child { border-right: none; }
+
+        .info-label {
+            font-size: 0.7em;
+            color: #999;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            margin-bottom: 8px;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 1.05em;
+        }
+
+        /* CONTENT */
+        .content {
+            padding: 70px 60px;
+        }
+
+        .intro {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 70px;
+            font-weight: 300;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .packages {
+            display: grid;
+            gap: 32px;
+            margin-bottom: 70px;
+        }
+
+        .package {
+            border: 1.5px solid var(--border);
+            padding: 44px;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            background: white;
+            overflow: hidden;
+        }
+
+        .package::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 5px;
+            height: 0;
+            background: var(--gradient);
+            transition: height 0.5s ease;
+        }
+
+        .package:hover {
+            border-color: var(--accent);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .package:hover::before {
+            height: 100%;
+        }
+
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .package-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.1em;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.8px;
+        }
+
+        .package-price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.6em;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1.5px;
+        }
+
+        .package-price sup {
+            font-size: 0.35em;
+            font-weight: 500;
+            color: var(--gray);
+            top: -1.2em;
+            margin-left: 2px;
+            -webkit-text-fill-color: var(--gray);
+        }
+
+        .package-features {
+            list-style: none;
+            margin-top: 8px;
+        }
+
+        .package-features li {
+            padding: 14px 0 14px 36px;
+            position: relative;
+            font-size: 1.02em;
+            color: #333;
+            font-weight: 400;
+            line-height: 1.6;
+            border-bottom: 1px solid #f5f5f5;
+            transition: all 0.3s ease;
+        }
+
+        .package-features li:hover {
+            padding-left: 42px;
+            color: var(--accent);
+        }
+
+        .package-features li:last-child {
+            border-bottom: none;
+        }
+
+        .package-features li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234a6cf7"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        .package-features li strong {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* CONDITIONS */
+        .conditions {
+            background: #fffcf0;
+            padding: 28px;
+            border-left: 5px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 50px;
+            font-size: 0.95em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conditions::before {
+            content: 'i';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 60px;
+            font-weight: 700;
+            color: rgba(74, 108, 247, 0.1);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .conditions-title {
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+            font-size: 1.15em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .conditions-title::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        .conditions-text {
+            color: #555;
+            line-height: 1.65;
+        }
+
+        /* PROCESS */
+        .process {
+            background: var(--gradient);
+            color: white;
+            padding: 70px 60px;
+            margin: 0 -60px 70px -60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="rgba(255,255,255,0.03)" d="M0,50 Q25,30 50,50 T100,50 L100,100 L0,100 Z"/></svg>') repeat;
+            pointer-events: none;
+        }
+
+        .process-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.4em;
+            font-weight: 700;
+            margin-bottom: 56px;
+            letter-spacing: -0.8px;
+            text-align: center;
+            position: relative;
+        }
+
+        .process-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: white;
+            border-radius: 2px;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step {
+            position: relative;
+            padding-left: 64px;
+            transition: transform 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: -8px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4.5em;
+            font-weight: 800;
+            color: rgba(255,255,255,0.12);
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .step-icon {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-size: 1.5em;
+            color: white;
+            opacity: 0.9;
+        }
+
+        .step-title {
+            font-weight: 600;
+            font-size: 1.15em;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .step-text {
+            color: rgba(255,255,255,0.88);
+            font-size: 1em;
+            line-height: 1.65;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 60px;
+            margin: 0 -60px -70px -60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="rgba(255,255,255,0.03)" d="M0,50 Q25,30 50,50 T100,50 L100,100 L0,100 Z"/></svg>') repeat;
+            pointer-events: none;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.98em;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-label {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.6;
+            font-weight: 500;
+        }
+
+        .contact-value {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .contact-value i {
+            font-size: 1.2em;
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .closing {
+            font-size: 1.1em;
+            margin: 50px 0 20px;
+            opacity: 0.9;
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.2em;
+            letter-spacing: 3px;
+            margin-top: 30px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.8em;
+            border-radius: 20px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header, .content, .process, .footer {
+                padding-left: 30px !important;
+                padding-right: 30px !important;
+                margin-left: -30px !important;
+                margin-right: -30px !important;
+            }
+
+            .header h1 { font-size: 2.6em; }
+            .info-bar { grid-template-columns: 1fr; }
+            .info-item { border-bottom: 1px solid var(--border); border-right: none; }
+            .info-item:last-child { border-bottom: none; }
+            .process-steps { grid-template-columns: 1fr; gap: 40px; }
+            .package-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .contact-info { gap: 40px; flex-direction: column; align-items: center; }
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; }
+            .package:hover { transform: none; box-shadow: none; }
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">IDEALO MEDIA ARTS</div>
+                <h1>Propuesta de<br>Servicios Digitales</h1>
+                <div class="subtitle">Gestión Profesional de Redes Sociales</div>
+                <div class="accent-line"></div>
+            </div>
+        </div>
+
+        <!-- INFO BAR -->
+        <div class="info-bar">
+            <div class="info-item">
+                <div class="info-label">Cliente</div>
+                <div class="info-value">Dra. Adriana Delvalle</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Fecha</div>
+                <div class="info-value">05 de Noviembre 2025</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Vigencia</div>
+                <div class="info-value">30 días</div>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+            <div class="intro fade-in">
+                Estimada Dra. Delvalle,<br><br>
+                Le presentamos tres opciones de servicios diseñadas para gestionar su presencia en redes sociales de manera profesional, estratégica y efectiva.
+            </div>
+
+            <div class="packages">
+                <!-- Paquete Inicial -->
+                <div class="package fade-in">
+                    <div class="package-header">
+                        <div class="package-title">Paquete Inicial</div>
+                        <div class="package-price">600.000<sup>Gs/mes</sup></div>
+                    </div>
+                    <ul class="package-features">
+                        <li>4 publicaciones mensuales (1 por semana)</li>
+                        <li>Reels o flyers diseñados profesionalmente</li>
+                        <li>Carruseles de hasta 5 imágenes</li>
+                    </ul>
+                </div>
+
+                <!-- Paquete Intermedio -->
+                <div class="package fade-in">
+                    <div class="package-header">
+                        <div class="package-title">Paquete Intermedio</div>
+                        <div class="package-price">1.200.000<sup>Gs/mes</sup></div>
+                    </div>
+                    <ul class="package-features">
+                        <li>8 publicaciones mensuales (2 por semana)</li>
+                        <li>Reels o flyers diseñados profesionalmente</li>
+                        <li>Carruseles de hasta 5 imágenes</li>
+                        <li><strong>Diseño de papelería</strong> — banners, tarjetas, material promocional</li>
+                    </ul>
+                </div>
+
+                <!-- Paquete Avanzado -->
+                <div class="package fade-in">
+                    <div class="package-header">
+                        <div class="package-title">Paquete Avanzado</div>
+                        <div class="package-price">1.700.000<sup>Gs/mes</sup></div>
+                    </div>
+                    <ul class="package-features">
+                        <li>12 publicaciones mensuales (3 por semana)</li>
+                        <li>Reels o flyers diseñados profesionalmente</li>
+                        <li>Carruseles de hasta 5 imágenes</li>
+                        <li><strong>Diseño de papelería completa</strong> — banners, tarjetas, material promocional</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Condiciones -->
+            <div class="conditions fade-in">
+                <div class="conditions-title">Condiciones Importantes</div>
+                <div class="conditions-text">
+                    Pago mensual anticipado. IVA no incluido en los precios mostrados. Cualquier cambio o servicio adicional se cotiza por separado.
+                </div>
+            </div>
+        </div>
+
+        <!-- PROCESS -->
+        <div class="process">
+            <h2 class="process-title">Nuestro Proceso de Trabajo</h2>
+            <div class="process-steps">
+                <div class="step fade-in">
+                    <div class="step-number">01</div>
+                    <div class="step-icon"><i class="fas fa-lightbulb"></i></div>
+                    <div class="step-title">Estrategia Inicial</div>
+                    <div class="step-text">Definimos objetivos, tono de voz y estilo visual alineado a tu marca.</div>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">02</div>
+                    <div class="step-icon"><i class="fas fa-palette"></i></div>
+                    <div class="step-title">Diseño & Aprobación</div>
+                    <div class="step-text">Creamos el contenido y lo enviamos para tu revisión y aprobación final.</div>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">03</div>
+                    <div class="step-icon"><i class="fas fa-rocket"></i></div>
+                    <div class="step-title">Publicación Programada</div>
+                    <div class="step-text">Publicamos en los días y horarios óptimos para maximizar el alcance.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="contact-info">
+                <div class="contact-item fade-in">
+                    <span class="contact-label">Teléfono</span>
+                    <span class="contact-value"><i class="fas fa-phone"></i> +595 982 510061</span>
+                </div>
+                <div class="contact-item fade-in">
+                    <span class="contact-label">Email</span>
+                    <span class="contact-value"><i class="fas fa-envelope"></i> IdealoMediaArts@gmail.com</span>
+                </div>
+            </div>
+            
+            <div class="social-links fade-in">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            
+            <div class="closing fade-in">
+                Esperamos trabajar juntos para potenciar su presencia digital con contenido profesional, consistente y de alto impacto.
+            </div>
+            <div class="brand fade-in">IDEALO MEDIA ARTS</div>
+        </div>
+    </div>
+
+    <script>
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add interactive hover effect to packages
+        document.querySelectorAll('.package').forEach(pkg => {
+            pkg.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+            });
+            
+            pkg.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
